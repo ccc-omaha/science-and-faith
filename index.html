@@ -217,6 +217,26 @@ footer .links{display:flex;gap:18px;flex-wrap:wrap}
 .ap-seek{flex:1;accent-color:var(--orange);min-width:60px}
 @media (max-width:640px){.ap-time,.ap-rate,.ap-back,.ap-fwd{display:none}.ap-label{font-size:10px}}
 
+/* share */
+.cw{position:relative}
+.cw>.card{height:100%;width:100%}
+.cw.hide{display:none}
+.msgs .cw.feature{grid-row:span 2}
+.share-btn{position:absolute;top:12px;right:12px;z-index:5;width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,.3);background:rgba(5,0,31,.55);backdrop-filter:blur(8px);color:#fff;display:grid;place-items:center;cursor:pointer;opacity:.85;transition:.2s}
+.share-btn svg{width:18px;height:18px;fill:currentColor}
+.share-btn:hover,.share-btn:focus-visible{opacity:1;background:var(--aqua);color:var(--navy);border-color:var(--aqua);transform:scale(1.08)}
+.card.audio .logtag{right:auto;left:14px;top:auto;bottom:14px}
+.share-pop{position:fixed;z-index:60;display:none;flex-direction:column;min-width:210px;max-width:280px;padding:8px;border-radius:14px;background:rgba(12,6,58,.97);border:1px solid var(--line);box-shadow:0 20px 50px rgba(0,0,0,.5)}
+.share-pop.open{display:flex;animation:fade .15s}
+.share-pop p{margin:4px 10px 8px;font-size:13px;color:var(--muted);line-height:1.3}
+.share-pop a,.share-pop button{font:600 14px var(--sans);color:#fff;text-decoration:none;text-align:left;background:none;border:0;padding:10px 12px;border-radius:8px;cursor:pointer}
+.share-pop a:hover,.share-pop button:hover{background:rgba(141,226,224,.14)}
+.toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,20px);z-index:70;background:var(--aqua);color:var(--navy);font:700 14px var(--sans);padding:10px 18px;border-radius:999px;opacity:0;pointer-events:none;transition:.25s}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.bar-actions{display:flex;align-items:center;gap:16px;flex-shrink:0}
+.btn.sm{padding:8px 14px;font-size:13px}
+.btn.sm svg{width:15px;height:15px;fill:currentColor}
+
 /* modal */
 .modal{position:fixed;inset:0;z-index:50;display:none;place-items:center;padding:20px;background:rgba(2,0,18,.86);backdrop-filter:blur(10px)}
 .modal.open{display:grid;animation:fade .3s ease}
@@ -394,28 +414,30 @@ footer .links{display:flex;gap:18px;flex-wrap:wrap}
 </div>
 <div class="sky-tip" aria-hidden="true">Tip: <b>click the sky</b></div>
 
+<div class="share-pop" id="sharePop" role="menu"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
   <button class="close" id="mClose" aria-label="Close video">×</button>
   <div class="box">
     <div class="player" id="player"></div>
-    <div class="bar"><h3 id="mTitle"></h3><a id="mLink" href="#" target="_blank" rel="noopener">Open in new tab ↗</a></div>
+    <div class="bar"><h3 id="mTitle"></h3><div class="bar-actions"><button class="btn ghost sm" id="mShare"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l4 4h-3v8h-2V7H8l4-4zM5 11h3v2H6v6h12v-6h-2v-2h3a1 1 0 011 1v8a1 1 0 01-1 1H5a1 1 0 01-1-1v-8a1 1 0 011-1z"/></svg> Share</button><a id="mLink" href="#" target="_blank" rel="noopener">Open in new tab ↗</a></div></div>
   </div>
 </div>
 
 <script>
 const SESSIONS=[
- {n:"Sessions 1 & 2",t:"Astrophysics, God and Open Q&A",d:"How decades of studying the universe led Dr. Ross to faith, followed by an open Q&A with both speakers.",day:"Friday · October 4",who:["hugh","fuz"],v:"1017264600",len:"1:57:48",thumb:"https://i.vimeocdn.com/video/1936196713-7dec3a86f6cf9bbb51984b6c9610fdbdac83a8e161248ea090f399e58667bf42-d_1280?region=us",c:["#0083E0","#633498"]},
- {n:"Session 3",t:"Synthetic Biology and Origins",d:"What synthetic biology suggests about the origin of life and the case for design.",day:"Saturday · October 5",who:["fuz"],v:"1017265872",len:"42:26",thumb:"https://i.vimeocdn.com/video/1936197640-24d91388b0582e0c2b852fdb0d3eb742376a25c698449d6089a4a0fe938f656f-d_1280?region=us",c:["#D81159","#633498"]},
- {n:"Session 4",t:"New Discoveries in Space and Time",d:"The latest findings in astronomy and what they reveal about the cosmos and its Creator.",day:"Saturday · October 5",who:["hugh"],v:"1019927307",len:"1:45:48",thumb:"https://i.vimeocdn.com/video/1938403026-84368f039223531110650bc4a03bb0c472e910b6d2961a343d0913682646aa65-d_1280?region=us",c:["#8DE2E0","#0083E0"]},
- {n:"Session 5 · Breakout",t:"UFOs and Life Beyond Earth",d:"A breakout on UFO sightings and the question of extraterrestrial life.",day:"Saturday · October 5",who:["hugh"],v:"1019928361",len:"1:37:28",thumb:"https://i.vimeocdn.com/video/1938403937-9ca6a74acded61fac23a454afadd27edbbb5e90cbc48d90d777c9f97db48a8d5-d_1280?region=us",c:["#FF8017","#D81159"]},
- {n:"Session 5 · Breakout",t:"Biotechnology, Ethics and Being Human",d:"A breakout on biotechnology, the ethical questions it raises and what it means to be human. Recorded as audio only.",day:"Saturday · October 5",who:["fuz"],a:"/assets/audio/session-5-fuz-breakout.mp3",len:"1:31:58",c:["#D81159","#FF8017"]},
- {n:"Session 6",t:"What Makes Us Human?",d:"What sets humans apart from animals and artificial intelligence.",day:"Saturday · October 5",who:["fuz"],v:"1022995451",len:"1:38:33",thumb:"https://i.vimeocdn.com/video/1942123290-7d13398257ebdd4c8b666dbe6b6fa6140e8e8450fdbeb5133500f7dc05606c64-d_1280?region=us",c:["#633498","#D81159"]},
- {n:"Session 7",t:"Design in the Animal Kingdom",d:"Unusual features in the animal world and what they point to.",day:"Sunday evening · October 6",who:["fuz"],v:"1022996679",len:"1:48:02",thumb:"https://i.vimeocdn.com/video/1942124440-6c3adbef3ecb0a375e0edb85ca8146ec77e368ad1d4307937f0ab184ed59f862-d_1280?region=us",c:["#CCF5DC","#0083E0"]}
+ {n:"Sessions 1 & 2",t:"Astrophysics, God and Open Q&A",d:"How decades of studying the universe led Dr. Ross to faith, followed by an open Q&A with both speakers.",day:"Friday · October 4",who:["hugh","fuz"],slug:"session-1-2",v:"1017264600",len:"1:57:48",thumb:"https://i.vimeocdn.com/video/1936196713-7dec3a86f6cf9bbb51984b6c9610fdbdac83a8e161248ea090f399e58667bf42-d_1280?region=us",c:["#0083E0","#633498"]},
+ {n:"Session 3",t:"Synthetic Biology and Origins",d:"What synthetic biology suggests about the origin of life and the case for design.",day:"Saturday · October 5",who:["fuz"],slug:"session-3",v:"1017265872",len:"42:26",thumb:"https://i.vimeocdn.com/video/1936197640-24d91388b0582e0c2b852fdb0d3eb742376a25c698449d6089a4a0fe938f656f-d_1280?region=us",c:["#D81159","#633498"]},
+ {n:"Session 4",t:"New Discoveries in Space and Time",d:"The latest findings in astronomy and what they reveal about the cosmos and its Creator.",day:"Saturday · October 5",who:["hugh"],slug:"session-4",v:"1019927307",len:"1:45:48",thumb:"https://i.vimeocdn.com/video/1938403026-84368f039223531110650bc4a03bb0c472e910b6d2961a343d0913682646aa65-d_1280?region=us",c:["#8DE2E0","#0083E0"]},
+ {n:"Session 5 · Breakout",t:"UFOs and Life Beyond Earth",d:"A breakout on UFO sightings and the question of extraterrestrial life.",day:"Saturday · October 5",who:["hugh"],slug:"session-5-hugh",v:"1019928361",len:"1:37:28",thumb:"https://i.vimeocdn.com/video/1938403937-9ca6a74acded61fac23a454afadd27edbbb5e90cbc48d90d777c9f97db48a8d5-d_1280?region=us",c:["#FF8017","#D81159"]},
+ {n:"Session 5 · Breakout",t:"Biotechnology, Ethics and Being Human",d:"A breakout on biotechnology, the ethical questions it raises and what it means to be human. Recorded as audio only.",day:"Saturday · October 5",who:["fuz"],slug:"session-5-fuz",a:"/assets/audio/session-5-fuz-breakout.mp3",len:"1:31:58",c:["#D81159","#FF8017"]},
+ {n:"Session 6",t:"What Makes Us Human?",d:"What sets humans apart from animals and artificial intelligence.",day:"Saturday · October 5",who:["fuz"],slug:"session-6",v:"1022995451",len:"1:38:33",thumb:"https://i.vimeocdn.com/video/1942123290-7d13398257ebdd4c8b666dbe6b6fa6140e8e8450fdbeb5133500f7dc05606c64-d_1280?region=us",c:["#633498","#D81159"]},
+ {n:"Session 7",t:"Design in the Animal Kingdom",d:"Unusual features in the animal world and what they point to.",day:"Sunday evening · October 6",who:["fuz"],slug:"session-7",v:"1022996679",len:"1:48:02",thumb:"https://i.vimeocdn.com/video/1942124440-6c3adbef3ecb0a375e0edb85ca8146ec77e368ad1d4307937f0ab184ed59f862-d_1280?region=us",c:["#CCF5DC","#0083E0"]}
 ];
 const MESSAGES=[
- {t:"God Is... Bigger than We Know",d:"A Sunday message on God’s transcendence and nearness, and why the scale of the universe points to a God bigger than we imagine.",kind:"Sunday message",who:"Dr. Hugh Ross",y:"rwwSAOf6UFI",feature:true,c:["#0083E0","#633498"]},
- {t:"Does Advancing Science Refute or Prove Genesis?",d:"How modern science lines up with the opening chapters of Scripture.",kind:"Sunday message",who:"Dr. Hugh Ross",y:"lfPDfXCzowI",c:["#D81159","#633498"]},
- {t:"unCOMFORTABLE Podcast 232",d:"Dr. Hugh Ross joins the unCOMFORTABLE podcast.",kind:"Podcast",who:"Dr. Hugh Ross",y:"80NRUuhL6kI",c:["#FF8017","#D81159"]}
+ {t:"God Is... Bigger than We Know",d:"A Sunday message on God’s transcendence and nearness, and why the scale of the universe points to a God bigger than we imagine.",kind:"Sunday message",who:"Dr. Hugh Ross",slug:"god-is-bigger",y:"rwwSAOf6UFI",feature:true,c:["#0083E0","#633498"]},
+ {t:"Does Advancing Science Refute or Prove Genesis?",d:"How modern science lines up with the opening chapters of Scripture.",kind:"Sunday message",who:"Dr. Hugh Ross",slug:"genesis-and-science",y:"lfPDfXCzowI",c:["#D81159","#633498"]},
+ {t:"unCOMFORTABLE Podcast 232",d:"Dr. Hugh Ross joins the unCOMFORTABLE podcast.",kind:"Podcast",who:"Dr. Hugh Ross",slug:"uncomfortable-232",y:"80NRUuhL6kI",c:["#FF8017","#D81159"]}
 ];
 const BOOKS=[
  {t:"God the Final Frontier",a:"Philip Delre",u:"https://www.exodus20.com/product/god-the-final-frontier-2/",img:"/assets/god-the-final-frontier.webp",c:["#0083E0","#00003D"]},
@@ -433,19 +455,17 @@ function imgFail(i){if(i.dataset.fb){const f=i.dataset.fb;i.removeAttribute('dat
 /* render sessions */
 const sg=document.getElementById('sessionGrid');
 const eq='<div class="eq" aria-hidden="true">'+Array.from({length:28},(_,i)=>`<i style="--i:${i};height:${(18+Math.abs(Math.sin(i*1.7)*Math.cos(i*.45))*72).toFixed(0)}%"></i>`).join('')+'</div>';
-sg.innerHTML=SESSIONS.map(s=>`
-<button class="card reveal${s.a?' audio':''}" data-who="${s.who.join(' ')}" data-kind="${s.a?'audio':'vimeo'}" data-id="${s.a||s.v}" data-title="${esc(s.n+': '+s.t)}" style="--c1:${s.c[0]};--c2:${s.c[1]}">
+sg.innerHTML=SESSIONS.map(s=>`<div class="cw" id="${s.slug}"><button class="card reveal${s.a?' audio':''}" data-who="${s.who.join(' ')}" data-kind="${s.a?'audio':'vimeo'}" data-id="${s.a||s.v}" data-slug="${s.slug}" data-title="${esc(s.n+': '+s.t)}" style="--c1:${s.c[0]};--c2:${s.c[1]}">
   <div class="thumb">${s.a?eq+'<span class="logtag">Audio log</span>':imgTag(s.thumb,s.n)}${playIcon}<span class="num">${esc(s.n)}</span><span class="dur">${s.len}</span></div>
   <div class="card-body"><h3>${esc(s.t)}</h3><p>${esc(s.d)}</p>
   <div class="meta">${s.who.map(w=>`<span class="tag ${w}">${NAMES[w]}</span>`).join('')}<span class="tag">${s.day}</span>${s.a?'<span class="tag audio">Audio only</span>':''}</div></div>
-</button>`).join('');
+</button><button class="share-btn" data-share="${s.slug}" aria-label="Share ${esc(s.n)}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l4 4h-3v8h-2V7H8l4-4zM5 11h3v2H6v6h12v-6h-2v-2h3a1 1 0 011 1v8a1 1 0 01-1 1H5a1 1 0 01-1-1v-8a1 1 0 011-1z"/></svg></button></div>`).join('');
 
 /* render messages */
-document.getElementById('msgGrid').innerHTML=MESSAGES.map(m=>`
-<button class="card reveal${m.feature?' feature':''}" data-kind="youtube" data-id="${m.y}" data-title="${esc(m.t)}" style="--c1:${m.c[0]};--c2:${m.c[1]}">
+document.getElementById('msgGrid').innerHTML=MESSAGES.map(m=>`<div class="cw${m.feature?' feature':''}" id="${m.slug}"><button class="card reveal${m.feature?' feature':''}" data-kind="youtube" data-id="${m.y}" data-slug="${m.slug}" data-title="${esc(m.t)}" style="--c1:${m.c[0]};--c2:${m.c[1]}">
   <div class="thumb">${imgTag(`https://i.ytimg.com/vi/${m.y}/maxresdefault.jpg`,m.t,`https://i.ytimg.com/vi/${m.y}/hqdefault.jpg`)}${playIcon}<span class="num">${m.kind}</span></div>
   <div class="card-body"><h3>${esc(m.t)}</h3><p>${esc(m.d)}</p><div class="meta"><span class="tag hugh">${m.who}</span></div></div>
-</button>`).join('');
+</button><button class="share-btn" data-share="${m.slug}" aria-label="Share ${esc(m.t)}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l4 4h-3v8h-2V7H8l4-4zM5 11h3v2H6v6h12v-6h-2v-2h3a1 1 0 011 1v8a1 1 0 01-1 1H5a1 1 0 01-1-1v-8a1 1 0 011-1z"/></svg></button></div>`).join('');
 
 /* render books */
 document.getElementById('shelf').innerHTML=BOOKS.map((b,i)=>`
@@ -458,12 +478,12 @@ document.getElementById('shelf').innerHTML=BOOKS.map((b,i)=>`
 document.querySelectorAll('.chip').forEach(ch=>ch.addEventListener('click',()=>{
   document.querySelectorAll('.chip').forEach(c=>c.setAttribute('aria-pressed',c===ch));
   const f=ch.dataset.f;
-  sg.querySelectorAll('.card').forEach(c=>c.classList.toggle('hide',f!=='all'&&!c.dataset.who.split(' ').includes(f)));
+  sg.querySelectorAll('.card').forEach(c=>c.parentElement.classList.toggle('hide',f!=='all'&&!c.dataset.who.split(' ').includes(f)));
 }));
 
 /* modal player */
 const modal=document.getElementById('modal'),player=document.getElementById('player'),mTitle=document.getElementById('mTitle'),mLink=document.getElementById('mLink');
-let lastFocus=null;
+let lastFocus=null,current=null;
 function openVideo(kind,id,title){
   lastFocus=document.activeElement;
   if(kind==='audio'){openAudio(id,title);return;}
@@ -522,11 +542,46 @@ function openAudio(src,title){
   player._cleanup=()=>{cancelAnimationFrame(raf);au.pause();actx&&actx.close();};
   document.getElementById('mClose').focus();
 }
-function closeVideo(){player._cleanup&&player._cleanup();player._cleanup=null;modal.classList.remove('open');player.innerHTML='';document.body.style.overflow='';lastFocus&&lastFocus.focus();}
-document.addEventListener('click',e=>{const c=e.target.closest('.card[data-kind]');if(c)openVideo(c.dataset.kind,c.dataset.id,c.dataset.title);});
+function closeVideo(){if(current&&location.hash==='#'+current)history.replaceState(null,'',location.pathname+location.search);current=null;hideShare();player._cleanup&&player._cleanup();player._cleanup=null;modal.classList.remove('open');player.innerHTML='';document.body.style.overflow='';lastFocus&&lastFocus.focus();}
+document.addEventListener('click',e=>{const c=e.target.closest('.card[data-kind]');if(c){current=c.dataset.slug;history.replaceState(null,'','#'+current);openVideo(c.dataset.kind,c.dataset.id,c.dataset.title);}});
 document.getElementById('mClose').onclick=closeVideo;
 modal.addEventListener('click',e=>{if(e.target===modal)closeVideo();});
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal.classList.contains('open'))closeVideo();});
+document.addEventListener('keydown',e=>{if(e.key!=='Escape')return;if(pop.classList.contains('open'))hideShare();else if(modal.classList.contains('open'))closeVideo();});
+
+/* SHARE */
+const SITE='https://www.scienceandfaithconference.com/';
+const ITEMS={};SESSIONS.forEach(x=>ITEMS[x.slug]={title:x.n+': '+x.t,who:x.who.map(w=>'Dr. '+NAMES[w]).join(' & ')});MESSAGES.forEach(x=>ITEMS[x.slug]={title:x.t,who:x.who});
+const pop=document.getElementById('sharePop'),toast=document.getElementById('toast');
+function shareData(slug){const it=ITEMS[slug];return{title:it.title,text:`${it.title} with ${it.who}, from the Science & Faith Conference`,url:SITE+'#'+slug};}
+function showToast(m){toast.textContent=m;toast.classList.add('on');clearTimeout(toast._t);toast._t=setTimeout(()=>toast.classList.remove('on'),2200);}
+async function copy(u){try{await navigator.clipboard.writeText(u);}catch(e){const i=document.createElement('textarea');i.value=u;i.style.position='fixed';i.style.opacity='0';document.body.appendChild(i);i.select();try{document.execCommand('copy');}catch(_){}i.remove();}showToast('Link copied');}
+function hideShare(){pop.classList.remove('open');}
+async function doShare(slug,anchor){
+  const d=shareData(slug);
+  if(navigator.share&&matchMedia('(pointer:coarse)').matches){try{await navigator.share(d);}catch(e){}return;}
+  const u=encodeURIComponent(d.url),t=encodeURIComponent(d.text);
+  pop.innerHTML=`<p>${esc(d.title)}</p>
+   <button data-act="copy">Copy link</button>
+   <a href="sms:?&body=${t}%20${u}">Text message</a>
+   <a href="mailto:?subject=${encodeURIComponent(d.title)}&body=${t}%0A%0A${u}">Email</a>
+   <a href="https://www.facebook.com/sharer/sharer.php?u=${u}" target="_blank" rel="noopener">Facebook</a>
+   <a href="https://twitter.com/intent/tweet?text=${t}&url=${u}" target="_blank" rel="noopener">X</a>`;
+  pop.querySelector('[data-act=copy]').onclick=()=>{copy(d.url);hideShare();};
+  pop.querySelectorAll('a').forEach(a=>a.addEventListener('click',hideShare));
+  const r=anchor.getBoundingClientRect();pop.classList.add('open');
+  const pw=pop.offsetWidth,ph=pop.offsetHeight;
+  let x=Math.min(innerWidth-pw-12,Math.max(12,r.right-pw)),y=r.bottom+8;if(y+ph>innerHeight-12)y=r.top-ph-8;
+  pop.style.left=x+'px';pop.style.top=y+'px';
+}
+document.addEventListener('click',e=>{
+  const b=e.target.closest('[data-share]');if(b){e.stopPropagation();doShare(b.dataset.share,b);return;}
+  if(!e.target.closest('#sharePop'))hideShare();
+},true);
+document.getElementById('mShare').addEventListener('click',e=>{e.stopPropagation();if(current)doShare(current,e.currentTarget);});
+addEventListener('scroll',hideShare,{passive:true});
+function openFromHash(){const h=location.hash.slice(1);const c=h&&document.querySelector(`.card[data-slug="${h}"]`);if(!c)return;
+  c.closest('.cw').scrollIntoView({block:'center'});current=h;setTimeout(()=>openVideo(c.dataset.kind,c.dataset.id,c.dataset.title),400);}
+addEventListener('hashchange',openFromHash);openFromHash();
 
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 
