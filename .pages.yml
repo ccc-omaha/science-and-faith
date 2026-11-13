@@ -57,10 +57,12 @@ content:
         description: Shown on the thumbnail, for example "Session 4" or "Session 5 · Breakout".
       - name: title
         label: Title
+        description: The bold title under the thumbnail, and in the popup player.
         type: string
         required: true
       - name: description
         label: Description
+        description: The short paragraph under the title on the card.
         type: text
       - name: day
         label: Day
@@ -73,8 +75,8 @@ content:
         options:
           multiple: true
           values:
-            - { name: hugh, label: Hugh Ross }
-            - { name: fuz, label: Fuz Rana }
+            - {name: hugh, label: Hugh Ross}
+            - {name: fuz, label: Fuz Rana}
       - name: video
         label: Vimeo link
         type: string
@@ -93,19 +95,21 @@ content:
         description: Leave blank to use Vimeo's own thumbnail.
       - name: color1
         label: Card glow, first color
+        description: The first color of the glow behind this card.
         type: select
         options: &colors
           values:
-            - { name: "#0083E0", label: Blue }
-            - { name: "#633498", label: Purple }
-            - { name: "#D81159", label: Magenta }
-            - { name: "#FF8017", label: Orange }
-            - { name: "#8DE2E0", label: Aqua }
-            - { name: "#CCF5DC", label: Mint }
-            - { name: "#F6CBE1", label: Light pink }
-            - { name: "#00003D", label: Navy }
+            - {name: "#0083E0", label: Blue}
+            - {name: "#633498", label: Purple}
+            - {name: "#D81159", label: Magenta}
+            - {name: "#FF8017", label: Orange}
+            - {name: "#8DE2E0", label: Aqua}
+            - {name: "#CCF5DC", label: Mint}
+            - {name: "#F6CBE1", label: Light pink}
+            - {name: "#00003D", label: Navy}
       - name: color2
         label: Card glow, second color
+        description: The second color of the glow behind this card.
         type: select
         options: *colors
       - name: shareName
@@ -123,10 +127,12 @@ content:
     fields:
       - name: title
         label: Title
+        description: The bold title under the thumbnail, and in the popup player.
         type: string
         required: true
       - name: description
         label: Description
+        description: The short paragraph under the title on the card.
         type: text
       - name: kind
         label: Type label
@@ -134,6 +140,7 @@ content:
         description: Shown on the thumbnail, for example "Sunday message" or "Podcast".
       - name: speaker
         label: Speaker
+        description: The tag at the bottom of the card.
         type: string
       - name: video
         label: YouTube link
@@ -142,13 +149,16 @@ content:
         description: Paste the youtube.com or youtu.be link.
       - name: featured
         label: Feature this one (large card)
+        description: Turn on for the one message that gets the large card. Leave the rest off.
         type: boolean
       - name: color1
         label: Card glow, first color
+        description: The first color of the glow behind this card.
         type: select
         options: *colors
       - name: color2
         label: Card glow, second color
+        description: The second color of the glow behind this card.
         type: select
         options: *colors
       - name: shareName
@@ -166,13 +176,16 @@ content:
     fields:
       - name: title
         label: Book title
+        description: Shown under the cover, and on the fallback cover if the image can't load.
         type: string
         required: true
       - name: author
         label: Author
+        description: Shown under the book title.
         type: string
       - name: link
         label: Where to get it (link)
+        description: Where the book opens when clicked. Paste the full https:// address.
         type: string
         required: true
       - name: cover
@@ -186,6 +199,7 @@ content:
         options: *colors
       - name: color2
         label: Fallback cover color 2
+        description: Used only if the cover image can't load.
         type: select
         options: *colors
 
@@ -199,13 +213,16 @@ content:
     fields:
       - name: name
         label: Name
+        description: The speaker's name next to their photo.
         type: string
         required: true
       - name: role
         label: Title line
+        description: The small line under the name.
         type: string
       - name: bio
         label: Bio
+        description: The paragraph under the title line. Use **bold** or [link text](https://...).
         type: text
       - name: photo
         label: Photo
