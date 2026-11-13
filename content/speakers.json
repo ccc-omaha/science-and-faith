@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Dr. Hugh Ross",
+    "role": "Astrophysicist · Founder, Reasons to Believe",
+    "bio": "Founder and senior scholar of Reasons to Believe. Hugh earned a degree in physics from the University of British Columbia and a PhD in astronomy from the University of Toronto, then researched quasars and galaxies as a postdoctoral fellow at Caltech before moving into full-time ministry.",
+    "photo": "/assets/hugh-ross.webp"
+  },
+  {
+    "name": "Dr. Fazale “Fuz” Rana",
+    "role": "Biochemist · President & CEO, Reasons to Believe",
+    "bio": "Fuz attended West Virginia State College and earned a PhD in chemistry from Ohio University, with postdoctoral work at the Universities of Virginia and Georgia. He now serves as President and CEO of Reasons to Believe.",
+    "photo": "/assets/fuz-rana.webp"
+  }
+]

@@ -1,0 +1,35 @@
+[
+  {
+    "title": "God Is... Bigger than We Know",
+    "description": "A Sunday message on God’s transcendence and nearness, and why the scale of the universe points to a God bigger than we imagine.",
+    "kind": "Sunday message",
+    "speaker": "Dr. Hugh Ross",
+    "video": "https://www.youtube.com/watch?v=rwwSAOf6UFI",
+    "featured": true,
+    "color1": "#0083E0",
+    "color2": "#633498",
+    "shareName": "god-is-bigger"
+  },
+  {
+    "title": "Does Advancing Science Refute or Prove Genesis?",
+    "description": "How modern science lines up with the opening chapters of Scripture.",
+    "kind": "Sunday message",
+    "speaker": "Dr. Hugh Ross",
+    "video": "https://www.youtube.com/watch?v=lfPDfXCzowI",
+    "featured": false,
+    "color1": "#D81159",
+    "color2": "#633498",
+    "shareName": "genesis-and-science"
+  },
+  {
+    "title": "unCOMFORTABLE Podcast 232",
+    "description": "Dr. Hugh Ross joins the unCOMFORTABLE podcast.",
+    "kind": "Podcast",
+    "speaker": "Dr. Hugh Ross",
+    "video": "https://www.youtube.com/watch?v=80NRUuhL6kI",
+    "featured": false,
+    "color1": "#FF8017",
+    "color2": "#D81159",
+    "shareName": "uncomfortable-232"
+  }
+]

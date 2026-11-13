@@ -1,0 +1,42 @@
+[
+  {
+    "title": "God the Final Frontier",
+    "author": "Philip Delre",
+    "link": "https://www.exodus20.com/product/god-the-final-frontier-2/",
+    "cover": "/assets/god-the-final-frontier.webp",
+    "color1": "#0083E0",
+    "color2": "#00003D"
+  },
+  {
+    "title": "The Case for a Creator",
+    "author": "Lee Strobel",
+    "link": "https://a.co/d/7woqvu9",
+    "cover": "https://m.media-amazon.com/images/I/81V4gh4WhzL._SY522_.jpg",
+    "color1": "#633498",
+    "color2": "#00003D"
+  },
+  {
+    "title": "The Case for a Creator for Kids",
+    "author": "Lee Strobel",
+    "link": "https://a.co/d/aGtH5Ga",
+    "cover": "https://m.media-amazon.com/images/I/81uNvJ0TKZL._SY522_.jpg",
+    "color1": "#FF8017",
+    "color2": "#D81159"
+  },
+  {
+    "title": "Show Me God",
+    "author": "Fred Heeren",
+    "link": "https://a.co/d/38A1Y0f",
+    "cover": "https://m.media-amazon.com/images/I/517GDRZECEL.jpg",
+    "color1": "#8DE2E0",
+    "color2": "#0083E0"
+  },
+  {
+    "title": "I Don’t Have Enough Faith to Be an Atheist",
+    "author": "Norman Geisler & Frank Turek",
+    "link": "https://a.co/d/bhG7oMK",
+    "cover": "https://m.media-amazon.com/images/I/7177%2BBAbnWL._SY522_.jpg",
+    "color1": "#D81159",
+    "color2": "#633498"
+  }
+]

@@ -1,0 +1,213 @@
+# Pages CMS configuration for scienceandfaithconference.com
+# Staff edit at https://app.pagescms.org. Saving commits to GitHub,
+# Netlify rebuilds the page from these files and republishes in about a minute.
+# Text fields accept **bold**, *italic* and [link text](https://...).
+
+settings:
+  commit:
+    identity: user   # record the staff member's name on each saved change
+
+media:
+  input: assets
+  output: /assets
+  rename: safe
+  extensions: [jpg, jpeg, png, webp, svg, mp3]
+
+content:
+  # ---------------------------------------------------------------
+  - name: intro
+    label: "1. Top of page and section intros"
+    type: file
+    path: content/intro.json
+    format: json
+    fields:
+      - name: badge
+        label: Pill under the logo
+        type: string
+        description: The small rounded line under the big logo. "· Omaha" is added after it on wide screens.
+      - name: lede
+        label: Intro paragraph
+        type: text
+        description: The paragraph under the pill. Wrap words in **double asterisks** to bold them.
+      - name: messagesIntro
+        label: Messages & Podcasts intro
+        type: text
+        description: The short paragraph next to the "Messages & Podcasts" heading.
+      - name: resourcesIntro
+        label: Resources intro
+        type: text
+        description: The short paragraph next to the "Conference Resources" heading.
+      - name: speakersIntro
+        label: Speakers intro
+        type: text
+        description: The short paragraph next to "The Speakers". Links use [link text](https://...).
+
+  # ---------------------------------------------------------------
+  - name: sessions
+    label: "2. Conference sessions"
+    type: file
+    path: content/sessions.json
+    format: json
+    list: true
+    fields:
+      - name: label
+        label: Session number
+        type: string
+        required: true
+        description: Shown on the thumbnail, for example "Session 4" or "Session 5 · Breakout".
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: description
+        label: Description
+        type: text
+      - name: day
+        label: Day
+        type: string
+        description: For example "Saturday · October 5".
+      - name: speakers
+        label: Speakers
+        type: select
+        description: Drives the speaker filter buttons above the sessions.
+        options:
+          multiple: true
+          values:
+            - { name: hugh, label: Hugh Ross }
+            - { name: fuz, label: Fuz Rana }
+      - name: video
+        label: Vimeo link
+        type: string
+        description: Paste the vimeo.com link. Leave blank for an audio-only session.
+      - name: audio
+        label: Audio file (audio-only sessions)
+        type: file
+        description: Only for sessions with no video. Shows the audio player instead.
+      - name: length
+        label: Length
+        type: string
+        description: Shown on the thumbnail, for example 1:42:10.
+      - name: thumbnail
+        label: Thumbnail image link (optional)
+        type: string
+        description: Leave blank to use Vimeo's own thumbnail.
+      - name: color1
+        label: Card glow, first color
+        type: select
+        options: &colors
+          values:
+            - { name: "#0083E0", label: Blue }
+            - { name: "#633498", label: Purple }
+            - { name: "#D81159", label: Magenta }
+            - { name: "#FF8017", label: Orange }
+            - { name: "#8DE2E0", label: Aqua }
+            - { name: "#CCF5DC", label: Mint }
+            - { name: "#F6CBE1", label: Light pink }
+            - { name: "#00003D", label: Navy }
+      - name: color2
+        label: Card glow, second color
+        type: select
+        options: *colors
+      - name: shareName
+        label: Share link name
+        type: string
+        description: The end of the share link (scienceandfaithconference.com/#this-part). Leave as is on existing sessions so shared links keep working. Leave blank on new ones and it's made from the title.
+
+  # ---------------------------------------------------------------
+  - name: messages
+    label: "3. Messages & podcasts"
+    type: file
+    path: content/messages.json
+    format: json
+    list: true
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: description
+        label: Description
+        type: text
+      - name: kind
+        label: Type label
+        type: string
+        description: Shown on the thumbnail, for example "Sunday message" or "Podcast".
+      - name: speaker
+        label: Speaker
+        type: string
+      - name: video
+        label: YouTube link
+        type: string
+        required: true
+        description: Paste the youtube.com or youtu.be link.
+      - name: featured
+        label: Feature this one (large card)
+        type: boolean
+      - name: color1
+        label: Card glow, first color
+        type: select
+        options: *colors
+      - name: color2
+        label: Card glow, second color
+        type: select
+        options: *colors
+      - name: shareName
+        label: Share link name
+        type: string
+        description: Leave as is on existing items. Leave blank on new ones.
+
+  # ---------------------------------------------------------------
+  - name: books
+    label: "4. Resources (books)"
+    type: file
+    path: content/books.json
+    format: json
+    list: true
+    fields:
+      - name: title
+        label: Book title
+        type: string
+        required: true
+      - name: author
+        label: Author
+        type: string
+      - name: link
+        label: Where to get it (link)
+        type: string
+        required: true
+      - name: cover
+        label: Cover image
+        type: image
+        description: Upload a cover, or paste an image link.
+      - name: color1
+        label: Fallback cover color 1
+        type: select
+        description: Used only if the cover image can't load.
+        options: *colors
+      - name: color2
+        label: Fallback cover color 2
+        type: select
+        options: *colors
+
+  # ---------------------------------------------------------------
+  - name: speakers
+    label: "5. Speakers"
+    type: file
+    path: content/speakers.json
+    format: json
+    list: true
+    fields:
+      - name: name
+        label: Name
+        type: string
+        required: true
+      - name: role
+        label: Title line
+        type: string
+      - name: bio
+        label: Bio
+        type: text
+      - name: photo
+        label: Photo
+        type: image
+        description: Square photos work best.
