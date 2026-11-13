@@ -1,7 +1,7 @@
 [
   {
     "label": "Sessions 1 & 2",
-    "title": "Astrophysics, God and Open Q&A",
+    "title": "Astrophysics, God, and Open Q&A",
     "description": "How decades of studying the universe led Dr. Ross to faith, followed by an open Q&A with both speakers.",
     "day": "Friday · October 4",
     "speakers": [
@@ -9,7 +9,6 @@
       "fuz"
     ],
     "video": "https://vimeo.com/1017264600",
-    "audio": "",
     "length": "1:57:48",
     "thumbnail": "https://i.vimeocdn.com/video/1936196713-7dec3a86f6cf9bbb51984b6c9610fdbdac83a8e161248ea090f399e58667bf42-d_1280?region=us",
     "color1": "#0083E0",
@@ -25,7 +24,6 @@
       "fuz"
     ],
     "video": "https://vimeo.com/1017265872",
-    "audio": "",
     "length": "42:26",
     "thumbnail": "https://i.vimeocdn.com/video/1936197640-24d91388b0582e0c2b852fdb0d3eb742376a25c698449d6089a4a0fe938f656f-d_1280?region=us",
     "color1": "#D81159",
@@ -41,7 +39,6 @@
       "hugh"
     ],
     "video": "https://vimeo.com/1019927307",
-    "audio": "",
     "length": "1:45:48",
     "thumbnail": "https://i.vimeocdn.com/video/1938403026-84368f039223531110650bc4a03bb0c472e910b6d2961a343d0913682646aa65-d_1280?region=us",
     "color1": "#8DE2E0",
@@ -57,7 +54,6 @@
       "hugh"
     ],
     "video": "https://vimeo.com/1019928361",
-    "audio": "",
     "length": "1:37:28",
     "thumbnail": "https://i.vimeocdn.com/video/1938403937-9ca6a74acded61fac23a454afadd27edbbb5e90cbc48d90d777c9f97db48a8d5-d_1280?region=us",
     "color1": "#FF8017",
@@ -67,15 +63,13 @@
   {
     "label": "Session 5 · Breakout",
     "title": "Biotechnology, Ethics and Being Human",
-    "description": "A breakout on biotechnology, the ethical questions it raises and what it means to be human. Recorded as audio only.",
+    "description": "A breakout on biotechnology, the ethical questions it raises, and what it means to be human. Recorded as audio only.",
     "day": "Saturday · October 5",
     "speakers": [
       "fuz"
     ],
-    "video": "",
     "audio": "/assets/audio/session-5-fuz-breakout.mp3",
     "length": "1:31:58",
-    "thumbnail": "",
     "color1": "#D81159",
     "color2": "#FF8017",
     "shareName": "session-5-fuz"
@@ -89,7 +83,6 @@
       "fuz"
     ],
     "video": "https://vimeo.com/1022995451",
-    "audio": "",
     "length": "1:38:33",
     "thumbnail": "https://i.vimeocdn.com/video/1942123290-7d13398257ebdd4c8b666dbe6b6fa6140e8e8450fdbeb5133500f7dc05606c64-d_1280?region=us",
     "color1": "#633498",
@@ -105,7 +98,6 @@
       "fuz"
     ],
     "video": "https://vimeo.com/1022996679",
-    "audio": "",
     "length": "1:48:02",
     "thumbnail": "https://i.vimeocdn.com/video/1942124440-6c3adbef3ecb0a375e0edb85ca8146ec77e368ad1d4307937f0ab184ed59f862-d_1280?region=us",
     "color1": "#CCF5DC",
