@@ -110,6 +110,9 @@ h2 .grad{background:linear-gradient(90deg,var(--aqua),var(--blue) 40%,var(--purp
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px}
 .card{position:relative;border-radius:22px;background:linear-gradient(160deg,rgba(26,10,90,.75),rgba(5,0,31,.85));border:1px solid var(--line);overflow:hidden;cursor:pointer;text-align:left;color:inherit;font:inherit;padding:0;
   transform-style:preserve-3d;transition:transform .25s ease-out, box-shadow .3s, border-color .3s, opacity .4s;will-change:transform}
+.card{display:flex;flex-direction:column;justify-content:flex-start;align-items:stretch}
+.card .thumb{width:100%;flex:0 0 auto}
+.card .card-body{flex:1 1 auto}
 .card:hover,.card:focus-visible{border-color:rgba(141,226,224,.6);box-shadow:0 20px 60px rgba(0,131,224,.25),0 0 0 1px rgba(141,226,224,.2)}
 .card:focus-visible{outline:2px solid var(--aqua);outline-offset:3px}
 .card.hide{display:none}
