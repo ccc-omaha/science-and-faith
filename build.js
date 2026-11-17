@@ -41,8 +41,15 @@ const speakerHtml = speakers.map(p => `
 // JSON inside a <script>: keep it from closing the tag
 const js = v => JSON.stringify(v).replace(/</g, '\\u003c');
 
+// Footer copyright: first year of the site through the year of this build, never typed by staff
+const FIRST_YEAR = 2024;
+const thisYear = new Date().getFullYear();
+const copyright = thisYear > FIRST_YEAR ? `${FIRST_YEAR}\u2013${thisYear}` : String(FIRST_YEAR);
+const footerMark = '<div>\u00a9 Christ Community Church';
 let html = fs.readFileSync(path.join(__dirname, 'src', 'template.html'), 'utf8');
+if (!html.includes(footerMark)) throw new Error('Footer copyright line not found in src/template.html');
 html = html
+  .replace(footerMark, `<div>\u00a9 ${copyright} Christ Community Church`)
   .replace('{{badge}}', esc(intro.badge))
   .replace('{{lede}}', fmt(intro.lede))
   .replace('{{messagesIntro}}', fmt(intro.messagesIntro))
