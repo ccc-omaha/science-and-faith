@@ -28,19 +28,19 @@ content:
       - name: lede
         label: Intro paragraph
         type: text
-        description: The paragraph under the pill. Wrap words in **double asterisks** to bold them.
+        description: "The paragraph under the pill. For italics, put one star (asterisk) on each side of the words. For bold, put two stars on each side."
       - name: messagesIntro
         label: Messages & Podcasts intro
         type: text
-        description: The short paragraph next to the "Messages & Podcasts" heading.
+        description: "The short paragraph next to the \"Messages & Podcasts\" heading. For italics, put one star (asterisk) on each side of the words. For bold, put two stars on each side."
       - name: resourcesIntro
         label: Resources intro
         type: text
-        description: The short paragraph next to the "Conference Resources" heading.
+        description: "The short paragraph next to the \"Conference Resources\" heading. For italics, put one star (asterisk) on each side of the words. For bold, put two stars on each side."
       - name: speakersIntro
         label: Speakers intro
         type: text
-        description: The short paragraph next to "The Speakers". Links use [link text](https://...).
+        description: "The short paragraph next to \"The Speakers\". Links use [link text](https://...). For italics, put one star (asterisk) on each side of the words. For bold, put two stars on each side."
 
   # ---------------------------------------------------------------
   - name: sessions
